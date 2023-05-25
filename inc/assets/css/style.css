@@ -1,0 +1,89 @@
+body {
+  color: #333;
+  font-size: 18px;
+}
+
+.header {
+  background-color: rgb(248, 250, 254);
+  padding: 1rem;
+}
+
+h1 {
+  --tw-bg-opacity: 1;
+  font-size: 3rem;
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+.form {
+  background-color: rgb(248, 250, 254);
+  width: 100%;
+}
+.form p {
+  font-weight: bold;
+}
+.form .required {
+  color: red;
+}
+
+.has-primary-50-background-color {
+  background-color: rgb(248, 250, 254);
+}
+
+.has-neutral-600-color {
+  color: #525d7a;
+}
+
+.form-field {
+  border-radius: 0px;
+}
+.form-field.has-error {
+  border: 1px solid red;
+}
+.form-field.no-error {
+  border: 1px solid green;
+}
+
+.form-text {
+  margin: 1em 0;
+}
+
+textarea {
+  height: 120px;
+  width: 100%;
+}
+
+.error {
+  color: red;
+}
+
+.success {
+  font-size: 18px;
+  font-weight: bold;
+  background-color: rgb(248, 250, 254);
+}
+
+.btn.btn-primary {
+  background-color: #185ce3;
+  color: #fff;
+  font-size: 18px;
+  margin-top: 0.5em;
+}
+.btn.btn-primary:hover {
+  background-color: rgb(93, 141, 235);
+  color: rgb(255, 255, 255);
+}
+
+#delete-form {
+  display: none;
+}
+#delete-form .btn {
+  background-color: #FFD580;
+  color: red;
+}
+
+#alert {
+  margin: 2rem auto;
+  text-align: center;
+  width: 100%;
+}/*# sourceMappingURL=style.css.map */

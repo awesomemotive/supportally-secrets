@@ -1,0 +1,17 @@
+{
+	"require-dev": {
+		"phpcompatibility/phpcompatibility-wp": "^2.1.4",
+		"humanmade/coding-standards": "^1.2",
+		"squizlabs/php_codesniffer": "^3.6"
+	},
+	"autoload": {
+        "psr-4": {
+            "ShareSecret\\": "inc/"
+        }
+    },
+	"config": {
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true
+		}
+	}
+}

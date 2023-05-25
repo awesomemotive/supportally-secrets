@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<ruleset name="SupportAlly">
+	<rule ref="HM"/>
+	<!-- Exclude tests. -->
+	<exclude-pattern>*/tests/*</exclude-pattern>
+
+	<!-- Exclude external libraries and builds. -->
+	<exclude-pattern>*/vendor/*</exclude-pattern>
+</ruleset>
