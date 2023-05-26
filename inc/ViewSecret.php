@@ -31,7 +31,7 @@ class ViewSecret extends ShareSecret
 			$mysqli->real_connect( $database_info['database_host'], $database_info['database_user'], $database_info['database_password'], $database_info['database_name'] );
 		} catch ( \Exception $e ) {
 			error_log( 'Error : ' . $e->getMessage() );
-			return 'DataBase Connection error';
+			return htmlspecialchars( 'DataBase Connection error' );
 		}
 		$stmt = $mysqli->prepare( "SELECT secret FROM secrets WHERE id = ?" );
 		$stmt->bind_param( 'i', $decrypted_id );

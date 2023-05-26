@@ -48,7 +48,7 @@ $secret_url = $this->view_secret();
 										Click to view the secret:
 									</p>
 									<textarea readonly style="display:none;" name="secret" id="alert-url">
-										<?php echo ( '' === $secret_url ) ? 'Secret expired or not found' : $secret_url; ?>
+										<?php echo ( '' === $secret_url ) ? htmlspecialchars( 'Secret expired or not found' ) : $secret_url; ?>
 									</textarea>
 								</div>
 							</div>
@@ -123,6 +123,6 @@ $secret_url = $this->view_secret();
 			</footer>
 		</div>
 		</body>
-	<script src="inc/assets/js/form.js?v=3.3"></script>
+	<script src="inc/assets/js/form.js?v=3.4"></script>
 </html>
 		

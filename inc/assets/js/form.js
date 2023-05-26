@@ -1,7 +1,17 @@
 window.addEventListener(
 	"load", function () {
 
+		const alert = document.getElementById("alert");
+		const alertDelete = document.getElementById("alert-delete");
+		const alertUrl = document.getElementById("alert-url");
+		const alertText = document.getElementById("alert-text");
+		const displayUrl = document.getElementById("display-url");
+
+		const deleteForm = document.getElementById("delete-form");
+		const viewForm = document.getElementById("view-form");
+
 		const deleteLink = document.querySelector(".view #secret-delete");
+
 		if (deleteLink !== null) {
 			deleteLink.value = window.location;
 		}
@@ -35,22 +45,22 @@ window.addEventListener(
 								console.log(response);
 								const responseText = JSON.parse(response);
 								if(responseText.error) {    
-									document.querySelector("#alert-text").innerText = responseText.error
-									document.querySelector("#alert").classList.add("error");
-									document.querySelector("#alert").style.display = "block";
-									document.querySelector("#display-url").style.display = "none";
+									alertText.innerText = responseText.error
+									alert.classList.add("error");
+									alert.style.display = "block";
+									displayUrl.style.display = "none";
 									return
 								}
-								document.querySelector("#alert-text").innerText = '';
-								document.querySelector(".secret-form").style.display = "none"
-								document.querySelector("#display-url").style.display = "block";
-								document.querySelector("#alert").classList.remove("error");
-								document.querySelector("#alert").style.display = "block";
-								document.querySelector("#alert").classList.add("success");
-								document.querySelector("#display-url").value = responseText.secret_url;
-								document.querySelector("#display-url").focus();
-								document.querySelector("#display-url").select();
-								document.querySelector("#delete-form").style.display = "block";
+								alertText.innerText = '';
+								form.style.display = "none"
+								displayUrl.style.display = "block";
+								alert.classList.remove("error");
+								alert.style.display = "block";
+								alert.classList.add("success");
+								displayUrl.value = responseText.secret_url;
+								displayUrl.focus();
+								displayUrl.select();
+								deleteForm.style.display = "block";
 								document.querySelector("#secret-delete").value = responseText.secret_url;
 							}
 						)
@@ -59,7 +69,6 @@ window.addEventListener(
 			);
 		}
 
-	const deleteForm = document.querySelector("#delete-form");
 		if (deleteForm !== null ) {
 			deleteForm.addEventListener(
 				"submit", function (event) {
@@ -75,36 +84,35 @@ window.addEventListener(
 						(response) => {
 							const deleteText = JSON.parse(response) // Get the response
 							if(deleteText.error ) { // If there is an error    
-								document.querySelector("#alert-delete").innerText = deleteText.error
-								document.querySelector("#alert-delete").classList.add("error")
+								alertDelete.innerText = deleteText.error
+								alertDelete.classList.add("error")
 								return
 							}
-							document.querySelector("#display-url").style.display = "none";
-							if ( document.querySelector("#view-form") !== null ) {
-								document.querySelector("#view-form").style.display = "none";
+							displayUrl.style.display = "none";
+							if ( viewForm !== null ) {
+								viewForm.style.display = "none";
 							}
-							document.querySelector("#delete-form").style.display = "none";
-							document.querySelector("#alert-delete").style.display = "block";
-							document.querySelector("#alert-delete").innerText = deleteText.success;
-							document.querySelector("#alert-delete").classList.add("success");
+							deleteForm.style.display = "none";
+							alertDelete.style.display = "block";
+							alertDelete.innerText = deleteText.success;
+							alertDelete.classList.add("success");
 						}
 					)
 				}
 			);
 		}
 
-	const viewForm = document.querySelector("#view-form");
 	if (viewForm !== null ) {
 		viewForm.addEventListener(
 			"submit", function (event) {
 				event.preventDefault();
 				document.querySelector("#view-button").style.display = "none";
-				if ( document.querySelector("#delete-form") !== null ) {
-					document.querySelector("#delete-form").style.display = "none";
+				if ( deleteForm !== null ) {
+					deleteForm.style.display = "block";
 				}
-				document.querySelector("#alert-url").style.display = "block";
-				document.querySelector("#alert-url").focus();
-				document.querySelector("#alert-url").select();
+				alertUrl.style.display = "block";
+				alertUrl.focus();
+				alertUrl.select();
 		});
 	}
 });
