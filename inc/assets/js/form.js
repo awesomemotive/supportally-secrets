@@ -32,15 +32,18 @@ window.addEventListener(
 						.then((response) => response.text())
 						.then(
 							(response) => {
+								console.log(response);
 								const responseText = JSON.parse(response);
 								if(responseText.error) {    
-									document.querySelector("#alert").innerText = responseText.error
+									document.querySelector("#alert-text").innerText = responseText.error
 									document.querySelector("#alert").classList.add("error");
 									document.querySelector("#alert").style.display = "block";
+									document.querySelector("#display-url").style.display = "none";
 									return
 								}
-
+								document.querySelector("#alert-text").innerText = '';
 								document.querySelector(".secret-form").style.display = "none"
+								document.querySelector("#display-url").style.display = "block";
 								document.querySelector("#alert").classList.remove("error");
 								document.querySelector("#alert").style.display = "block";
 								document.querySelector("#alert").classList.add("success");
@@ -75,6 +78,10 @@ window.addEventListener(
 								document.querySelector("#alert-delete").innerText = deleteText.error
 								document.querySelector("#alert-delete").classList.add("error")
 								return
+							}
+							document.querySelector("#display-url").style.display = "none";
+							if ( document.querySelector("#view-form") !== null ) {
+								document.querySelector("#view-form").style.display = "none";
 							}
 							document.querySelector("#delete-form").style.display = "none";
 							document.querySelector("#alert-delete").style.display = "block";

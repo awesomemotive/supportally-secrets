@@ -1,6 +1,6 @@
 <?php
 /**
- * Index file
+ * Index file. Start it all.
  */
 namespace ShareSecret;
 require_once __DIR__.'/vendor/autoload.php';
@@ -20,6 +20,3 @@ if ( isset( $_POST['secret_url'] ) ) {
 } else {
 	$share_secret->display_form();
 }
-
-
-

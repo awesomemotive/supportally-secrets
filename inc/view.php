@@ -120,6 +120,6 @@ $secret_url = $this->view_secret();
 			</footer>
 		</div>
 		</body>
-	<script src="inc/assets/js/form.js?v=2.8"></script>
+	<script src="inc/assets/js/form.js?v=3.2"></script>
 </html>
 		
