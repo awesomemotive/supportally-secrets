@@ -41,7 +41,7 @@ class ViewSecret extends ShareSecret
 		$stmt->close();
 		$mysqli->close();
 		if ( empty( $row ) ) {
-			return 'Secret expired or removed.';
+			return $decrypted_secret = '';
 		}
 
 		$secret = $row['secret'];

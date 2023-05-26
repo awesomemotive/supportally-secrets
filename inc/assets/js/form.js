@@ -99,7 +99,9 @@ window.addEventListener(
 			"submit", function (event) {
 				event.preventDefault();
 				document.querySelector("#view-button").style.display = "none";
-				document.querySelector("#delete-form").style.display = "block";
+				if ( document.querySelector("#delete-form") !== null ) {
+					document.querySelector("#delete-form").style.display = "none";
+				}
 				document.querySelector("#alert-url").style.display = "block";
 				document.querySelector("#alert-url").focus();
 				document.querySelector("#alert-url").select();

@@ -3,6 +3,7 @@
  * View.
  */
 $secret_url = $this->view_secret();
+
 ?>
 
 <!DOCTYPE html>
@@ -47,7 +48,7 @@ $secret_url = $this->view_secret();
 										Click to view the secret:
 									</p>
 									<textarea readonly style="display:none;" name="secret" id="alert-url">
-										<?php echo $secret_url; ?>
+										<?php echo ( '' === $secret_url ) ? 'Secret expired or not found' : $secret_url; ?>
 									</textarea>
 								</div>
 							</div>
@@ -57,12 +58,14 @@ $secret_url = $this->view_secret();
 						<p id="alert-text"></p>
 						<textarea id="display-url" readonly></textarea>
 					</div>
+					<?php if ( $secret_url ) : ?>
 					<form method="post" id="delete-form" class="form delete-form wpforms-form" style="display: none;">
 						<input type="hidden" name="secret_url" id="secret-delete">
 						<button type="detete" class="btn btn-primary wpforms-submit" id="delete-button">Remove Secret</button>
 					</form>
 					<div id="alert-delete" class="text-center" style="display: none;">
 					</div>
+					<?php endif; ?>
 				</div>
 			</div>
 		</div>
@@ -120,6 +123,6 @@ $secret_url = $this->view_secret();
 			</footer>
 		</div>
 		</body>
-	<script src="inc/assets/js/form.js?v=3.2"></script>
+	<script src="inc/assets/js/form.js?v=3.3"></script>
 </html>
 		
