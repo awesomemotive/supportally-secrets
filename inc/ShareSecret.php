@@ -46,7 +46,6 @@ class ShareSecret
 	public function init()
 	{
 		$this->create_the_table();
-		$this->delete_data();
 	}
 
 	/**
@@ -150,12 +149,21 @@ class ShareSecret
 			$mysqli->real_connect( $database_info['database_host'], $database_info['database_user'], $database_info['database_password'], $database_info['database_name'] );
 		} catch ( \Exception $e ) {
 			error_log( "Error : " . $e->getMessage());
+			echo "Error : " . $e->getMessage();
 			return;
 		}
-		$delete_sql = "DELETE FROM secrets WHERE created_at < (NOW() - INTERVAL 30 DAY)";
+		try {
+			$delete_sql = "DELETE FROM secrets WHERE created_at < (NOW() - INTERVAL 30 DAY)";
+		} catch ( \Exception $e ) {
+			error_log( "Error : " . $e->getMessage());
+			echo "Error : " . $e->getMessage();
+			return;
+		}
+
 		$stmt = $mysqli->prepare( $delete_sql );
 		$stmt->execute();
 		$stmt->close();
 		$mysqli->close();
+		echo "Deleted old data";
 	}
 }
