@@ -74,7 +74,7 @@ class ShareSecret
 
 	   $sql = "CREATE TABLE IF NOT EXISTS secrets (
 			id BIGINT(20) AUTO_INCREMENT PRIMARY KEY,
-			secret VARCHAR(255),
+			secret LONGTEXT NOT NULL,
 			created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 		)";
 		$stmt = $mysqli->prepare( $sql );
