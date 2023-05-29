@@ -2,7 +2,8 @@
 /**
  * Class ShareSecret
  */
-namespace ShareSecret;
+namespace ShareSecret\Controllers;
+use ShareSecret\Models\ShareSecretModel;
 
 require_once 'wp-config.php';
 
@@ -22,6 +23,22 @@ class ShareSecretController
 	}
 
 	/**
+	 * Init the plugin.
+	 */
+	public function init()
+	{
+		if ( isset( $_POST['secret_url'] ) ) {
+			$this->delete_secret();
+		} elseif ( isset( $_POST['secret'] ) ) {
+			$this->save_secret();
+		} elseif( isset( $_GET['view'] ) ) {
+			$this->display_secret();
+		} else {
+			$this->display_form();
+		}
+	}
+
+	/**
 	 * Get the secret key.
 	 */
 	protected function get_secret_key() {	
@@ -33,12 +50,12 @@ class ShareSecretController
 	 */
 	public function display_form()
 	{
-		include_once __DIR__.'/views/form.html';
+		include_once __DIR__.'/../views/form.html';
 	}
 
-	public function display_secret( $secret )
+	public function display_secret()
 	{
-		include_once __DIR__.'/views/secret.html';
+		include_once __DIR__.'/../views/secret.php';
 	}
 
 	/**
@@ -172,13 +189,6 @@ class ShareSecretController
 		}
 		$decrypted_secret = $this->decrypt_string( $secret );
 		return $decrypted_secret;
-	}
-
-	/**
-	 * Display the secret.
-	 */
-	public function view_secret() {
-		require_once __DIR__.'/views/secret.php';
 	}
 
 	/**

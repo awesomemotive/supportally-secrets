@@ -1,5 +1,5 @@
 <?php
-namespace ShareSecret;
+namespace ShareSecret\Models;
 
 /**
  * Class ShareSecretModel
