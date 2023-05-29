@@ -6,4 +6,4 @@
 /vendor/
 composer.lock
 wp-config.php
-/images/
+inc/assets/images/

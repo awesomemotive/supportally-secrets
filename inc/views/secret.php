@@ -2,7 +2,7 @@
 /**
  * View.
  */
-$secret_url = $this->view_secret();
+$secret_url = $this->decrypt_secret();
 
 ?>
 
