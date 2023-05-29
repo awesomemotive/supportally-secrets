@@ -50,7 +50,7 @@ class ShareSecretController
 	 */
 	public function display_form()
 	{
-		include_once __DIR__.'/../views/form.html';
+		include_once __DIR__.'/../views/form.php';
 	}
 
 	public function display_secret()
