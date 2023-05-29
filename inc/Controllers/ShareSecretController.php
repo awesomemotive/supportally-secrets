@@ -17,7 +17,7 @@ class ShareSecretController
 	/**
 	 * ShareSecret constructor.
 	 */
-	public function __construct()
+	public function __construct( private ShareSecretModel $model )
 	{
 		$this->secretKey = sodium_hex2bin( KEY );
 	}
@@ -138,8 +138,7 @@ class ShareSecretController
 		} else {
 			$secret = $_POST['secret'];
 			$secret_enctypted = $this->encrypt( $secret );
-			$data = new ShareSecretModel();
-			$secret_id = $data->save_secret( $secret_enctypted );
+			$secret_id = $this->model->save_secret( $secret_enctypted );
 			$encrypted_id = $this->encrypt( $secret_id );
 			$site_url = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'];
 			$link = http_build_query( array_merge( $_GET, array( 'view'=>$encrypted_id ) ) );
@@ -161,8 +160,7 @@ class ShareSecretController
 		$secret_id = substr( $_POST['secret_url'], strpos( $_POST['secret_url'], "=" ) + 1 );
 		$decrypted_id = $this->decrypt_string( $secret_id );
 		$decrypted_id = intval( $decrypted_id );
-		$data = new ShareSecretModel();
-		$data->delete_secret( $decrypted_id );
+		$this->model->delete_secret( $decrypted_id );
 		echo json_encode( [ 'success' => 'Secret deleted successfully' ] );
 	}
 
@@ -182,8 +180,8 @@ class ShareSecretController
 		if ( ! $decrypted_id ) {
 			return 'Not a valid url';
 		}
-		$data = new ShareSecretModel();
-		$secret = $data->get_secret( $decrypted_id );
+		
+		$secret = $this->model->get_secret( $decrypted_id );
 		if ( ! $secret ) {
 			return 'Not a valid url';
 		}
@@ -196,7 +194,6 @@ class ShareSecretController
 	 */
 	public function delete_expired_secrets()
 	{
-		$data = new ShareSecretModel();
-		$data->delete_expired_secrets();
+		$this->model->delete_expired_secrets();
 	}
 }

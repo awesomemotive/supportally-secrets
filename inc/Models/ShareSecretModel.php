@@ -31,10 +31,9 @@ class ShareSecretModel {
 	}
 
 	/**
-	 * Create the table if it doesn't exist
+	 * Create the connection.
 	 */
-	public function create_the_table()
-	{	
+	protected function create_connection() {
 		$database_info = $this->get_database_info();
 		$mysqli = mysqli_init();
 		mysqli_report( MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT );
@@ -42,10 +41,26 @@ class ShareSecretModel {
 			$mysqli->real_connect( $database_info['database_host'], $database_info['database_user'], $database_info['database_password'], $database_info['database_name'] );
 		} catch ( \Exception $e ) {
 			error_log( "Error : " . $e->getMessage());
-			return;
+			return json_encode( ['error' => "DB Error"] );
 		}
+		return $mysqli;
+	}
 
-	   $sql = "CREATE TABLE IF NOT EXISTS secrets (
+	/**
+	 * Close the connection.
+	 */
+	protected function close_the_connection( $mysqli ) {
+		$mysqli->close();
+	}
+
+	/**
+	 * Create the table if it doesn't exist
+	 */
+	public function create_the_table()
+	{	
+		$mysqli = $this->create_connection();
+
+		$sql = "CREATE TABLE IF NOT EXISTS secrets (
 			id BIGINT(20) AUTO_INCREMENT PRIMARY KEY,
 			secret LONGTEXT NOT NULL,
 			created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -53,7 +68,7 @@ class ShareSecretModel {
 		$stmt = $mysqli->prepare( $sql );
 		$stmt->execute();
 		$stmt->close();
-		$mysqli->close();
+		$this->close_the_connection( $mysqli );
 	}
 
 	/**
@@ -62,17 +77,7 @@ class ShareSecretModel {
 	public function save_secret( $secret_enctypted )
 	{
 		// Save the secret at the DB.
-		$database_info = $this->get_database_info();
-		$mysqli = mysqli_init();
-		mysqli_report( MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT );
-		try {
-			$mysqli->real_connect( $database_info['database_host'], $database_info['database_user'], $database_info['database_password'], $database_info['database_name'] );
-		} catch ( \Exception $e ) {
-			error_log( "Error : " . $e->getMessage());
-			echo ( json_encode( ['error' => "DataBase Connection error "]));
-			return;
-		}
-		
+		$mysqli = $this->create_connection();
 		$insert_sql = "INSERT INTO secrets (secret) VALUES (?)";
 		$stmt = $mysqli->prepare( $insert_sql );
 		$stmt->bind_param( 's', $secret_enctypted );
@@ -86,7 +91,7 @@ class ShareSecretModel {
 		// Get the ID of the record.
 		$secret_id = $mysqli->insert_id;
 		$stmt->close();
-		$mysqli->close();
+		$this->close_the_connection( $mysqli );
 		return $secret_id;
 	}
 
@@ -95,16 +100,7 @@ class ShareSecretModel {
 	 */
 	public function delete_expired_secrets()
 	{
-		$database_info = $this->get_database_info();
-		$mysqli = mysqli_init();
-		mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-		try {
-			$mysqli->real_connect( $database_info['database_host'], $database_info['database_user'], $database_info['database_password'], $database_info['database_name'] );
-		} catch ( \Exception $e ) {
-			error_log( "Error : " . $e->getMessage());
-			echo "Error : " . $e->getMessage();
-			return;
-		}
+		$mysqli = $this->create_connection();
 		try {
 			$delete_sql = "DELETE FROM secrets WHERE created_at < (NOW() - INTERVAL 30 DAY)";
 		} catch ( \Exception $e ) {
@@ -116,7 +112,7 @@ class ShareSecretModel {
 		$stmt = $mysqli->prepare( $delete_sql );
 		$stmt->execute();
 		$stmt->close();
-		$mysqli->close();
+		$this->close_the_connection( $mysqli );
 		echo "Deleted old data";
 	}
 
@@ -127,22 +123,14 @@ class ShareSecretModel {
 	 */
 	public function get_secret( $decrypted_id )
 	{
-		$database_info = $this->get_database_info();
-		$mysqli = mysqli_init();
-		mysqli_report( MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT );
-		try {
-			$mysqli->real_connect( $database_info['database_host'], $database_info['database_user'], $database_info['database_password'], $database_info['database_name'] );
-		} catch ( \Exception $e ) {
-			error_log( 'Error : ' . $e->getMessage() );
-			return htmlspecialchars( 'DataBase Connection error' );
-		}
+		$mysqli = $this->create_connection();
 		$stmt = $mysqli->prepare( "SELECT secret FROM secrets WHERE id = ?" );
 		$stmt->bind_param( 'i', $decrypted_id );
 		$stmt->execute();
 		$result = $stmt->get_result();
 		$row = $result->fetch_assoc();
 		$stmt->close();
-		$mysqli->close();
+		$this->close_the_connection( $mysqli );
 		if ( empty( $row ) ) {
 			return $decrypted_secret = '';
 		}
@@ -159,16 +147,7 @@ class ShareSecretModel {
 	 */
 	public function delete_secret( $decrypted_id )
 	{
-		$database_info = $this->get_database_info();
-		$mysqli = mysqli_init();
-		mysqli_report( MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT );
-		try {
-			$mysqli->real_connect( $database_info['database_host'], $database_info['database_user'], $database_info['database_password'], $database_info['database_name'] );
-		} catch ( \Exception $e ) {
-			error_log( "Error : " . $e->getMessage() );
-			echo ( json_encode( ['error' => "DataBase Connection error "] ) );
-			return;
-		}
+		$mysqli = $this->create_connection();
 		$stmt = $mysqli->prepare( "DELETE FROM secrets WHERE id = ?" );
 		$stmt->bind_param( 'i', $decrypted_id );
 		try {
@@ -178,6 +157,6 @@ class ShareSecretModel {
 			return;
 		}
 		$stmt->close();
-		$mysqli->close();
+		$this->close_the_connection( $mysqli );
 	}	
 }

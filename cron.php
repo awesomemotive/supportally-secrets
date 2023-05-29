@@ -3,9 +3,8 @@
  * Call the delete secrers.
  */
 namespace ShareSecret;
-use ShareSecret\Controllers\ShareSecretController;
 
-require_once __DIR__.'/inc/ShareSecretController.php';
+require_once __DIR__.'/inc/ShareSecretFactory.php';
 
-$secrets = new ShareSecretController();
-$secrets->delete_expired_secrets();
+$share_secret = new ShareSecretFactory();
+$share_secret->create_share_secret()->delete_expired_secrets();

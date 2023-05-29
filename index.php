@@ -3,9 +3,8 @@
  * Index file. Start it all.
  */
 namespace ShareSecret;
-use ShareSecret\Controllers\ShareSecretController;
 
 require_once __DIR__.'/vendor/autoload.php';
 
-$share_secret = new ShareSecretController();
-$share_secret->init();
+$share_secret = new ShareSecretFactory();
+$share_secret->create_share_secret()->init();
