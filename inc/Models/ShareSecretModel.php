@@ -168,7 +168,7 @@ class ShareSecretModel {
 	/**
 	 * Delete the secret from the database.
 	 * @param $decrypted_id
-	 * @return string
+	 * @return bool
 	 */
 	public function delete_secret( $decrypted_id )
 	{

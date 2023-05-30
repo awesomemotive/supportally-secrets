@@ -17,6 +17,7 @@ class ShareSecretController
 
 	/**
 	 * ShareSecret constructor.
+	 * @param ShareSecretModel $model
 	 */
 	public function __construct( private ShareSecretModel $model )
 	{	
