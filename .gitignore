@@ -8,4 +8,3 @@ vendor/*
 !vendor/autoload.php
 composer.lock
 wp-config.php
-inc/assets/images/
