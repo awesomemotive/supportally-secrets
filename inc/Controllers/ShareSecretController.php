@@ -4,6 +4,7 @@
  */
 namespace ShareSecret\Controllers;
 use ShareSecret\Models\ShareSecretModel;
+use RuntimeException;
 
 require_once 'wp-config.php';
 
@@ -18,7 +19,10 @@ class ShareSecretController
 	 * ShareSecret constructor.
 	 */
 	public function __construct( private ShareSecretModel $model )
-	{
+	{	
+		if ( ! defined( 'KEY' ) ) {
+			throw new RuntimeException( 'Missing key' );
+		}
 		$this->secretKey = sodium_hex2bin( KEY );
 	}
 

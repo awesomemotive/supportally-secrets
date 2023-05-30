@@ -1,5 +1,6 @@
 <?php
 namespace ShareSecret\Models;
+use RuntimeException;
 
 /**
  * Class ShareSecretModel
@@ -14,6 +15,9 @@ class ShareSecretModel {
 	 * ShareSecretModel constructor.
 	 */
 	public function __construct() {
+		if ( ! defined( 'DB_HOST' ) || ! defined( 'DB_USER' ) || ! defined( 'DB_PASSWORD' ) || ! defined( 'DB_NAME' ) ) {
+			throw new RuntimeException( 'Incomplete credentials' );
+		}
 		$this->database_info = array(
 			'database_host'     => DB_HOST,
 			'database_user'     => DB_USER,
