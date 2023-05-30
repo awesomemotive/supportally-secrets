@@ -139,6 +139,9 @@ class ShareSecretController
 			$secret = $_POST['secret'];
 			$secret_enctypted = $this->encrypt( $secret );
 			$secret_id = $this->model->save_secret( $secret_enctypted );
+			if ( ! $secret_id ) {
+				return;
+			}
 			$encrypted_id = $this->encrypt( $secret_id );
 			$site_url = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'];
 			$link = http_build_query( array_merge( $_GET, array( 'view'=>$encrypted_id ) ) );
@@ -160,8 +163,13 @@ class ShareSecretController
 		$secret_id = substr( $_POST['secret_url'], strpos( $_POST['secret_url'], "=" ) + 1 );
 		$decrypted_id = $this->decrypt_string( $secret_id );
 		$decrypted_id = intval( $decrypted_id );
-		$this->model->delete_secret( $decrypted_id );
-		echo json_encode( [ 'success' => 'Secret deleted successfully' ] );
+		$delete = $this->model->delete_secret( $decrypted_id );
+		if ( $delete === true ) {
+			echo json_encode( [ 'success' => 'Secret deleted successfully' ] );
+		} else {
+			echo json_encode( [ 'error' => 'DB error' ] );
+		}
+
 	}
 
 	/**

@@ -86,6 +86,7 @@ window.addEventListener(
 							if(deleteText.error ) { // If there is an error    
 								alertDelete.innerText = deleteText.error
 								alertDelete.classList.add("error")
+								alertDelete.style.display = "block";
 								return
 							}
 							displayUrl.style.display = "none";

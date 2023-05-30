@@ -41,13 +41,15 @@ class ShareSecretModel {
 			$mysqli->real_connect( $database_info['database_host'], $database_info['database_user'], $database_info['database_password'], $database_info['database_name'] );
 		} catch ( \Exception $e ) {
 			error_log( "Error : " . $e->getMessage());
-			return json_encode( ['error' => "DB Error"] );
+			return;
 		}
 		return $mysqli;
 	}
 
 	/**
 	 * Close the connection.
+	 * @param $mysqli
+	 * @return void
 	 */
 	protected function close_the_connection( $mysqli ) {
 		$mysqli->close();
@@ -59,6 +61,11 @@ class ShareSecretModel {
 	public function create_the_table()
 	{	
 		$mysqli = $this->create_connection();
+
+		if ( ! is_object( $mysqli ) ) {
+			echo "DB Connection Error";
+			die();
+		}
 
 		$sql = "CREATE TABLE IF NOT EXISTS secrets (
 			id BIGINT(20) AUTO_INCREMENT PRIMARY KEY,
@@ -73,11 +80,17 @@ class ShareSecretModel {
 
 	/**
 	 * Save the secret to the database
+	 * @param $secret_enctypted
+	 * @return int
 	 */
 	public function save_secret( $secret_enctypted )
 	{
 		// Save the secret at the DB.
 		$mysqli = $this->create_connection();
+		if ( ! is_object( $mysqli ) ) {
+			echo json_encode( ['error' => "DB Connection Error"] );
+			return;
+		}
 		$insert_sql = "INSERT INTO secrets (secret) VALUES (?)";
 		$stmt = $mysqli->prepare( $insert_sql );
 		$stmt->bind_param( 's', $secret_enctypted );
@@ -101,6 +114,10 @@ class ShareSecretModel {
 	public function delete_expired_secrets()
 	{
 		$mysqli = $this->create_connection();
+		if ( ! is_object( $mysqli ) ) {
+			echo "DB Connection Error";
+			return;
+		}
 		try {
 			$delete_sql = "DELETE FROM secrets WHERE created_at < (NOW() - INTERVAL 30 DAY)";
 		} catch ( \Exception $e ) {
@@ -123,7 +140,11 @@ class ShareSecretModel {
 	 */
 	public function get_secret( $decrypted_id )
 	{
+
 		$mysqli = $this->create_connection();
+		if ( ! is_object( $mysqli ) ) {
+			return $secret = '';
+		}
 		$stmt = $mysqli->prepare( "SELECT secret FROM secrets WHERE id = ?" );
 		$stmt->bind_param( 'i', $decrypted_id );
 		$stmt->execute();
@@ -132,7 +153,7 @@ class ShareSecretModel {
 		$stmt->close();
 		$this->close_the_connection( $mysqli );
 		if ( empty( $row ) ) {
-			return $decrypted_secret = '';
+			return $secret = '';
 		}
 
 		$secret = $row['secret'];
@@ -148,15 +169,20 @@ class ShareSecretModel {
 	public function delete_secret( $decrypted_id )
 	{
 		$mysqli = $this->create_connection();
+		if ( ! is_object( $mysqli ) ) {
+			return false;
+		}
+		$mysqli = $this->create_connection();
 		$stmt = $mysqli->prepare( "DELETE FROM secrets WHERE id = ?" );
 		$stmt->bind_param( 'i', $decrypted_id );
 		try {
 			$stmt->execute();
 		} catch ( \Exception $e ) {
-			echo ( json_encode( ['error' => "Error : " . mysqli_error( $mysqli ) ]));
-			return;
+			echo  ( json_encode( ['error' => "Error : " . mysqli_error( $mysqli ) ]));
+			return false;
 		}
 		$stmt->close();
 		$this->close_the_connection( $mysqli );
+		return true;
 	}	
 }
