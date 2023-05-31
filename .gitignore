@@ -6,5 +6,6 @@
 vendor/*
 !vendor/composer/
 !vendor/autoload.php
+!vendor/paragonie/
 composer.lock
 wp-config.php
