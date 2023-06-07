@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Class ShareSecret
  */
@@ -6,7 +6,7 @@ namespace ShareSecret\Controllers;
 use ShareSecret\Models\ShareSecretModel;
 use RuntimeException;
 
-require_once 'wp-config.php';
+require_once dirname(dirname(dirname(dirname(__FILE__)))) . '/wp-config.php';
 
 /**
  * Class ShareSecret
@@ -20,7 +20,7 @@ class ShareSecretController
 	 * @param ShareSecretModel $model
 	 */
 	public function __construct( private ShareSecretModel $model )
-	{	
+	{
 		if ( ! defined( 'KEY' ) ) {
 			throw new RuntimeException( 'Missing key' );
 		}
@@ -46,7 +46,7 @@ class ShareSecretController
 	/**
 	 * Get the secret key.
 	 */
-	protected function get_secret_key() {	
+	protected function get_secret_key() {
 		return $this->secretKey;
 	}
 
@@ -130,7 +130,7 @@ class ShareSecretController
 		if( ! isset( $_POST['g-recaptcha-response'] ) ) {
 			echo json_encode( [ 'error' => 'Invalid reCaptcha, please try again.' ] );
 			return;
-		
+
 		}
 		$recaptcha = $_POST['g-recaptcha-response'];
 		$url = 'https://www.google.com/recaptcha/api/siteverify?secret=' . urlencode( RECAPTCHA_V2_SECRET_KEY ) .  '&response=' . urlencode( $recaptcha );
@@ -189,11 +189,11 @@ class ShareSecretController
 
 		$decrypted_id = $this->decrypt_string( $secret_id );
 		$decrypted_id = intval( $decrypted_id );
-		
+
 		if ( ! $decrypted_id ) {
 			return 'Not a valid url';
 		}
-		
+
 		$secret = $this->model->get_secret( $decrypted_id );
 		if ( ! $secret ) {
 			return 'Not a valid url';
