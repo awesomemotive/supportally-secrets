@@ -12,27 +12,45 @@ header {
 		width: 100%;
 	}
 	.contain {
-		max-width: calc(800px + 6rem);
+		max-width: calc(600px + 6rem);
+	}
+
+	a.main-site {
+		color: #333;
+		&:hover {
+			color: #185ce3;
+		}
 	}
 }
 
 .content.secrets>:not(.alignfull) {
-	max-width: calc(800px + 6rem);
 	padding-right: 3rem;
+	
+}
+
+.content.secrets {
+	.secrets-form {
+		max-width: calc(600px + 6rem);
+	}
 }
 
 .content.secrets>:not(.alignfull):not(.alignwide) {
 	padding-right: 3rem;
+	.wp-container-12 {
+		padding: 0;
+	}
 }
 
 .form {
-	background-color:rgb(248 250 254);
 	width: 100%;
 	p {
 		font-weight: bold;
 	}
 	.required {
 		color: red;
+	}
+	.btn-primary {
+		width: 100%;
 	}
 }
 
@@ -55,11 +73,14 @@ header {
 }
 
 .form-text {
+	font-size: 1rem;
 	margin: 1em 0;
 	text-align: center;
-	span {
-		font-size: 1rem;
-	}
+}
+
+.form-text-below {
+	font-size: 0.75em;
+	margin: 1em 0;
 }
 
 textarea {

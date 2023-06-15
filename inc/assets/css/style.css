@@ -13,20 +13,31 @@ header h1.secrets-title {
   width: 100%;
 }
 header .contain {
-  max-width: calc(800px + 6rem);
+  max-width: calc(600px + 6rem);
+}
+header a.main-site {
+  color: #333;
+}
+header a.main-site:hover {
+  color: #185ce3;
 }
 
 .content.secrets > :not(.alignfull) {
-  max-width: calc(800px + 6rem);
   padding-right: 3rem;
+}
+
+.content.secrets .secrets-form {
+  max-width: calc(600px + 6rem);
 }
 
 .content.secrets > :not(.alignfull):not(.alignwide) {
   padding-right: 3rem;
 }
+.content.secrets > :not(.alignfull):not(.alignwide) .wp-container-12 {
+  padding: 0;
+}
 
 .form {
-  background-color: rgb(248, 250, 254);
   width: 100%;
 }
 .form p {
@@ -34,6 +45,9 @@ header .contain {
 }
 .form .required {
   color: red;
+}
+.form .btn-primary {
+  width: 100%;
 }
 
 .has-primary-50-background-color {
@@ -55,11 +69,14 @@ header .contain {
 }
 
 .form-text {
+  font-size: 1rem;
   margin: 1em 0;
   text-align: center;
 }
-.form-text span {
-  font-size: 1rem;
+
+.form-text-below {
+  font-size: 0.75em;
+  margin: 1em 0;
 }
 
 textarea {
