@@ -3,16 +3,26 @@ body {
 	font-size: 18px;
 }
 
-.header {
+header {
 	background-color: rgb(248 250 254);
 	padding: 1rem;
+	h1.secrets-title {
+		font-size: 2rem;
+		--tw-bg-opacity: 1;
+		width: 100%;
+	}
+	.contain {
+		max-width: calc(800px + 6rem);
+	}
 }
 
-h1 {
-	--tw-bg-opacity: 1;
-	font-size: 3rem;
-	margin-bottom: 2rem;
-	width: 100%;
+.content.secrets>:not(.alignfull) {
+	max-width: calc(800px + 6rem);
+	padding-right: 3rem;
+}
+
+.content.secrets>:not(.alignfull):not(.alignwide) {
+	padding-right: 3rem;
 }
 
 .form {
@@ -46,6 +56,10 @@ h1 {
 
 .form-text {
 	margin: 1em 0;
+	text-align: center;
+	span {
+		font-size: 1rem;
+	}
 }
 
 textarea {
@@ -88,4 +102,8 @@ textarea {
 	margin: 2rem auto;
 	text-align: center;
 	width: 100%;
+}
+
+.footer.py-12 {
+	padding: 2rem;
 }

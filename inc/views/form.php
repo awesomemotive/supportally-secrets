@@ -5,14 +5,10 @@
  */
 include __DIR__.'/header.html';
 ?>
-	<main class="grow content overflow-x-hidden">
-		<div class="form-text has-neutral-600-color has-text-color">
-			<p>Share information with your customer service agent without it being stored in email in 3 simple steps</p>
-			<ol type="1">
-				<li>Sumbit the form below and receive a secure link</li>
-				<li>Provide the link to your support agent</li>
-				<li>The secure information is automatically removed within 30 days or when the support agent no longer needs, whichever comes first </li>
-			</ol>	
+	<main class="grow content overflow-x-hidden secrets">
+		<div class="form-text has-text-color">
+			<p>Paste a password, secret message or private link below.</br>
+			<span class="has-neutral-600-color">Keep sensitive info out of your email and chat logs.</span></p>
 		</div>
 		<div class="is-layout-flow wp-block-group alignwide">
 			<div class="am-block am-block-icon-grid align"></div>
@@ -22,11 +18,7 @@ include __DIR__.'/header.html';
 
 						<div class="wpforms-field-container">
 							<div class="form-field wpforms-field wpforms-field-textarea">
-								<h3>Secure Entry Form</h3>
-								<p class="label wpforms-field-label">
-									Secure information:<span class="required">*</span>
-								</p>
-								<textarea name="secret" id="secret" class="form-control"></textarea>
+								<textarea name="secret" id="secret" class="form-control" placeholder="Secret content goes here..."></textarea>
 							</div>
 						</div>
 						<div class="g-recaptcha" data-sitekey="6LfzLTwmAAAAABw1orGpihxHx-dmbnAoX-8-HLsk"></div>
