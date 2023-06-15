@@ -17,6 +17,7 @@ require_once(dirname(dirname(dirname(__FILE__)))) . '/wp-config.php';
 class ShareSecretController
 {
     private $secretKey;
+	private $model;
 
     /**
      * ShareSecret constructor.
@@ -27,6 +28,7 @@ class ShareSecretController
         if (! defined('KEY')) {
             throw new RuntimeException('Missing key');
         }
+		$this->model = $model;
         $this->secretKey = sodium_hex2bin(KEY);
     }
 
