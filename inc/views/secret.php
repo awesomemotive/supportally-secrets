@@ -5,18 +5,10 @@
 $secret_url = $this->decrypt_secret();
 include_once __DIR__.'/../views/header.html';
 ?>
-	<main class="grow content overflow-x-hidden view">
-		<div class="form-text has-neutral-600-color has-text-color">
-			<p>Share information with your customer service agent without it being stored in email in 3 simple steps</p>
-			<ol type="1">
-				<li>Sumbit the form below and receive a secure link</li>
-				<li>Provide the link to your support agent</li>
-				<li>The secure information is automatically removed within 30 days or when the support agent no longer needs, whichever comes first </li>
-			</ol>	
-		</div>
-		<div class="is-layout-flow wp-block-group alignwide">
+	<main class="grow content overflow-x-hidden view secrets">
+		<div class="secrets-form is-layout-flow wp-block-group alignwide">
 			<div class="am-block am-block-icon-grid align"></div>
-			<div class="is-layout-constrained wp-container-12 wp-block-group  has-primary-50-background-color has-background">
+			<div class="is-layout-constrained wp-container-12 wp-block-group">
 				<div class="wpforms-container wpforms-container-full">
 					<form method="get" id="view-form" class="form secret-form wpforms-form">
 						<div class="wpforms-field-container">

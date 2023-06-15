@@ -38,6 +38,7 @@ header a.main-site:hover {
 }
 
 .form {
+  margin: 2rem 0;
   width: 100%;
 }
 .form p {
