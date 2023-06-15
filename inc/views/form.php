@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * View for the form.
  *
@@ -12,7 +12,7 @@ include __DIR__.'/header.html';
 				<li>Sumbit the form below and receive a secure link</li>
 				<li>Provide the link to your support agent</li>
 				<li>The secure information is automatically removed within 30 days or when the support agent no longer needs, whichever comes first </li>
-			</ol>	
+			</ol>
 		</div>
 		<div class="is-layout-flow wp-block-group alignwide">
 			<div class="am-block am-block-icon-grid align"></div>
@@ -29,7 +29,7 @@ include __DIR__.'/header.html';
 								<textarea name="secret" id="secret" class="form-control"></textarea>
 							</div>
 						</div>
-						<div class="g-recaptcha" data-sitekey="6LfzLTwmAAAAABw1orGpihxHx-dmbnAoX-8-HLsk"></div>
+						<div class="g-recaptcha" data-sitekey="<?php echo RECAPTCHA_V2_SITE_KEY; ?>"></div>
 						<button type="submit" class="btn btn-primary wpforms-submit" id="submit-button">Create Secret Link</button>
 					</form>
 					<div id="alert" class="text-center wpforms-field wpforms-field-textarea" style="display: none;">
@@ -52,4 +52,4 @@ include __DIR__.'/header.html';
 	<?php include __DIR__.'/brands.html'; ?>
 
 	</main>
-<?php include __DIR__.'/footer.html'; ?>			
+<?php include __DIR__.'/footer.html'; ?>
