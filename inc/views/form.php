@@ -4,7 +4,7 @@
  *
  */
 include __DIR__.'/header.html';
-define('RECAPTCHA_V2_SITE_KEY', '6LfzLTwmAAAAABw1orGpihxHx-dmbnAoX-8-HLsk');
+
 ?>
 	<main class="grow content overflow-x-hidden secrets">
 		<div class="form-text has-text-color">
