@@ -34,6 +34,14 @@ include_once __DIR__.'/../views/header.html';
 						<button type="detete" class="btn btn-primary wpforms-submit" id="delete-button">Remove Secret</button>
 					</form>
 					<div id="alert-delete" class="text-center" style="display: none;"></div>
+					<div class="form-text-below has-neutral-600-color has-text-color">
+						<p>
+						The secure information is automatically removed within 30 days or when the support agent no longer needs it, whichever comes first.
+						</p>	
+					</div>
+					<div class="am-block am-block-spacer align">
+						<div class="h-12 md:h-24"></div>
+					</div>
 				<?php endif; ?>
 			</div>
 		</div>

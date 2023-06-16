@@ -9,7 +9,7 @@ header {
 	h1.secrets-title {
 		font-size: 2rem;
 		--tw-bg-opacity: 1;
-		width: 100%;
+		width: 70%;
 	}
 	.contain {
 		max-width: calc(600px + 6rem);
@@ -38,6 +38,12 @@ header {
 	padding-right: 3rem;
 	.wp-container-12 {
 		padding: 0;
+	}
+}
+
+.am-block-brands {
+	h2 {
+		text-align: center;
 	}
 }
 
@@ -96,7 +102,6 @@ textarea {
 .success {
 	font-size: 18px;
 	font-weight: bold;
-	background-color: rgb(248 250 254);
 }
 
 .btn {
@@ -118,6 +123,11 @@ textarea {
 		background-color: #FFD580;
 		color: red;
 	}
+}
+
+#alert-delete {
+	margin-bottom: 1rem;
+	margin-top: 1rem;
 }
 
 #alert {

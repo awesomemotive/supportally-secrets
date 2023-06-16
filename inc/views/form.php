@@ -4,6 +4,7 @@
  *
  */
 include __DIR__.'/header.html';
+
 ?>
 	<main class="grow content overflow-x-hidden secrets">
 		<div class="form-text has-text-color">
@@ -24,14 +25,7 @@ include __DIR__.'/header.html';
 						<div class="g-recaptcha" data-sitekey="<?php echo RECAPTCHA_V2_SITE_KEY; ?>"></div>
 						<button type="submit" class="btn btn-primary wpforms-submit" id="submit-button">Create Secret Link</button>
 					</form>
-					<div class="form-text-below has-neutral-600-color has-text-color">
-						<p>Share information with your customer service agent without it being stored in email in 3 simple steps</p>
-						<ol type="1">
-							<li>Sumbit the form below and receive a secure link</li>
-							<li>Provide the link to your support agent</li>
-							<li>The secure information is automatically removed within 30 days or when the support agent no longer needs, whichever comes first </li>
-						</ol>	
-					</div>
+					
 					<div id="alert" class="text-center wpforms-field wpforms-field-textarea" style="display: none;">
 						<p id="alert-text"></p>
 						<textarea id="display-url" readonly></textarea>
@@ -40,8 +34,12 @@ include __DIR__.'/header.html';
 						<input type="hidden" name="secret_url" id="secret-delete">
 						<button type="detete" class="btn btn-primary wpforms-submit" id="delete-button">Remove Secret</button>
 					</form>
-					<div id="alert-delete" class="text-center" style="display: none;">
-				</div>
+					<div id="alert-delete" class="text-center" style="display: none;"></div>
+					<div class="form-text-below has-neutral-600-color has-text-color">
+						<p>
+						The secure information is automatically removed within 30 days or when the support agent no longer needs it, whichever comes first.
+						</p>	
+					</div>
 			</div>
 		</div>
 	</div>
