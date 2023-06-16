@@ -4,7 +4,6 @@
  *
  */
 include __DIR__.'/header.html';
-
 ?>
 	<main class="grow content overflow-x-hidden secrets">
 		<div class="form-text has-text-color">
@@ -53,4 +52,4 @@ include __DIR__.'/header.html';
 	<?php include __DIR__.'/brands.html'; ?>
 
 	</main>
-<?php include __DIR__.'/footer.html'; ?>
+<?php include __DIR__.'/footer.php'; ?>

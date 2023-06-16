@@ -7,5 +7,5 @@
 </footer>
 </div>
 </body>
-<script src="inc/assets/js/form.js?v=3.5" async deffer></script>
+<script src=<?php echo "/inc/assets/js/form.js?v=" . rand(); ?> async defer></script>
 </html>

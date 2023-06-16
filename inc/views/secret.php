@@ -40,4 +40,4 @@ include_once __DIR__.'/../views/header.html';
 	</div>
 	<?php include_once __DIR__.'/../views/brands.html'; ?>
 	</main>
-<?php include_once __DIR__.'/../views/footer.html'; ?>
+<?php include_once __DIR__.'/../views/footer.php'; ?>

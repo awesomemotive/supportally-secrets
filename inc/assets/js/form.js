@@ -35,7 +35,7 @@ window.addEventListener(
 						}
 					}
 					if(valid===true) {
-						fetch("/../index.php", {
+						fetch(window.location.origin, {
 							method: "POST",
 							body: new FormData(form), // Send the form data
 						})    
@@ -74,7 +74,7 @@ window.addEventListener(
 				"submit", function (event) {
 					event.preventDefault() 
 					fetch(
-						"/../index.php", {
+						window.location.origin, {
 							method: "POST",
 							body: new FormData(deleteForm), // Send the form data
 						}
