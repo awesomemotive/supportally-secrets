@@ -2,6 +2,8 @@
 namespace ShareSecret\Models;
 use RuntimeException;
 
+require_once (dirname(dirname(dirname(__FILE__)))) . '/wp-config.php';
+
 /**
  * Class ShareSecretModel
  */
@@ -10,7 +12,7 @@ class ShareSecretModel {
 	 * @var array
 	 */
 	private $database_info;
-	
+
 	/**
 	 * ShareSecretModel constructor.
 	 */
@@ -63,7 +65,7 @@ class ShareSecretModel {
 	 * Create the table if it doesn't exist
 	 */
 	public function create_the_table()
-	{	
+	{
 		$mysqli = $this->create_connection();
 
 		if ( ! is_object( $mysqli ) ) {
@@ -161,7 +163,7 @@ class ShareSecretModel {
 		}
 
 		$secret = $row['secret'];
-		
+
 		return $secret;
 	}
 
@@ -188,5 +190,5 @@ class ShareSecretModel {
 		$stmt->close();
 		$this->close_the_connection( $mysqli );
 		return true;
-	}	
+	}
 }
