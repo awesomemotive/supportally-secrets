@@ -26,6 +26,7 @@ class ShareSecretModel {
 			'database_password' => DB_PASSWORD,
 			'database_name'     => DB_NAME,
 		);
+		$this->create_the_table();
 	}
 
 	/**
@@ -33,7 +34,6 @@ class ShareSecretModel {
 	 */
 	protected function get_database_info() {
 		return $this->database_info;
-		$this->create_the_table();
 	}
 
 	/**
