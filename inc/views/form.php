@@ -37,7 +37,7 @@ include __DIR__.'/header.html';
 					<div id="alert-delete" class="text-center" style="display: none;"></div>
 					<div class="form-text-below has-neutral-600-color has-text-color">
 						<p>
-						The secure information is automatically removed within 30 days or when the support agent no longer needs it, whichever comes first.
+						Automatically removed when the support agent no longer needs it (max 30 days)
 						</p>	
 					</div>
 			</div>
