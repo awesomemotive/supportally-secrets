@@ -105,6 +105,9 @@ class ShareSecretController
     public function encrypt($str)
     {
         $nonce = random_bytes(SODIUM_CRYPTO_SECRETBOX_NONCEBYTES);
+		error_log( $str );
+		error_log( $nonce );
+		error_log( $this->secretKey );
         $encrypted_text = $this->base64url_encode($nonce . sodium_crypto_secretbox($str, $nonce, $this->secretKey));
         return $encrypted_text;
     }
@@ -152,7 +155,7 @@ class ShareSecretController
             if (! $secret_id) {
                 return;
             }
-            $encrypted_id = $this->encrypt($secret_id);
+            $encrypted_id = $this->encrypt(strval($secret_id));
             $site_url = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'];
             $link = http_build_query(array_merge($_GET, array( 'view' => $encrypted_id )));
             $secret_url = $site_url . '?' . $link;
