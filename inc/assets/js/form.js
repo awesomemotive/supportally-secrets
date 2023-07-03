@@ -114,6 +114,8 @@ window.addEventListener(
 				alertUrl.style.display = "block";
 				alertUrl.focus();
 				alertUrl.select();
+				viewForm.querySelector("h3").style.display = "none";
+				viewForm.querySelector("p").style.display = "none";
 		});
 	}
 });
